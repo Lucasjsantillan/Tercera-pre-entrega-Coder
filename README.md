@@ -3,7 +3,7 @@
 
 <p align="left"> <a href="https://twitter.com/lucasjsantillan" target="blank"><img src="https://img.shields.io/twitter/follow/lucasjsantillan?logo=twitter&style=for-the-badge" alt="lucasjsantillan" /></a> </p>
 
-- 🔭 I’m currently working on [Simulador-interactivoCoder](https://github.com/Viseryz/Simulador-interactivoCoder)
+- 🔭 I’m currently working on [Tercera-pre-entrega-Coder](https://github.com/Lucasjsantillan/Tercera-pre-entrega-Coder/tree/master)
 
 - 🌱 I’m currently learning **JavaScript**
 
