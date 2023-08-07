@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/styles_index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;600&display=swap" rel="stylesheet">
+    <title>Tercera Pre Entrega</title>
+</head>
+
+<body>
+    <header>
+        <h1>Itinerario Viajes</h1>
+    </header>
+    <form id="form" class="form">
+        <h2 class="form-title">Ingrese su Viaje</h2>
+        <label>Titular</label>
+        <input id="nombre" type="text" class="form-input" placeholder="Titular" required>
+        <label>Origen</label>
+        <input id="origen" list="Origen" class="form-input" placeholder="Origen" required>
+        <datalist id="Origen">
+            <option value="BUENOS AIRES"></option>
+            <option value="ROSARIO"></option>
+        </datalist>
+        <label>Destino</label>
+        <input id="destino" list="Destino" class="form-input" placeholder="Destino" required>
+        <datalist id="Destino">
+            <option value="MISIONES"></option>
+            <option value="MENDOZA"></option>
+            <option value="SANTA CRUZ"></option>
+            <option value="SALTA"></option>
+            <option value="NEUQUEN"></option>
+        </datalist>
+        <label for="fechaIda">Ida</label>
+        <input id="fechaIda" type="date" class="form-input" placeholder="Fecha Ida" required>
+        <label for="fechaVuelta">Vuelta</label>
+        <input id="fechaVuelta" type="date" class="form-input" placeholder="Fecha Vuelta" required>
+        <label>Cantidad de pasajeros</label>
+        <input id="pasajeros" type="number" class="form-input" placeholder="Pasajeros" required>
+        <button class="form-btn" type="submit">Ingresar</button>
+
+
+    </form>
+    <nav>
+        <ul>
+            <li>
+                <a href="index.html">Ver Viajes</a>
+            </li>
+            <li>
+                <a href="editar.html">Editar Viajes</a>
+            </li>
+        </ul>
+    </nav>
+
+    <nav class="filtradoNav" id="filtro">
+        <h2>Filtros</h2>
+        <br>
+        <label for="filtroNombre">Titular</label>
+        <input id="filtroNombre" type="text" class="filtradoNav-input" placeholder="Ingrese Titular">
+        <label for="filtroOrigen">Origen</label>
+        <input id="filtroOrigen" type="text" class="filtradoNav-input" placeholder="Ingrese Origen" list="Origen">
+        <label for="filtroDestino">Destino</label>
+        <input id="filtroDestino" type="text" class="filtradoNav-input" placeholder="Ingrese Destino" list="Destino">
+        <label for="filtroPrecio_menor">Menor Precio</label>
+        <input id="filtroPrecio_menor" type="submit" class="filtradoNav-input" name="precio">
+        <label for="filtroPrecio_mayor">Mayor Precio</label>
+        <input id="filtroPrecio_mayor" type="submit" class="filtradoNav-input" name="precio">
+    </nav>
+    <section id="viajes" class="vuelos">
+
+    </section>
+    <script src="./js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
+</body>
+
+</html>
