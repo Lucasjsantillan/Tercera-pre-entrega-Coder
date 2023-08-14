@@ -153,33 +153,52 @@ function borrarViaje(id) {
 }
 
 function editarViaje(id) {
-    const editarViajeBtn = document.querySelector("#form_editar_" + id);
-    editarViajeBtn.addEventListener("submit", (e) => {
+    const editarViajeForm = document.querySelector("#form_editar_" + id);
+    editarViajeForm.addEventListener("submit", (e) => {
+        e.preventDefault(); // Evitar que el formulario se envíe automáticamente
+        
         let fecha1, fecha2;
         const index = viajes.findIndex((e) => e.id == id);
-        const data = e.target.children;
+        const data = e.target.elements;
         fecha1 = data["fechaIda"].value;
         fecha2 = data["fechaVuelta"].value;
-        console.log(fecha1, fecha2);
-        viajes[index].nombre = (data["nombre"].value).toUpperCase();
-        viajes[index].origen = data["origen"].value;
-        viajes[index].destino = data["destino"].value;
-        viajes[index].pasajeros = data["pasajeros"].value;
-        viajes[index].fechaIda = fecha1;
-        viajes[index].fechaVuelta = fecha2;
-        viajes.forEach(viaje => {
-            viaje.viajeEstadia(viaje.fechaIda, viaje.fechaVuelta);
-            viaje.viajePrecio();
-        })
 
-        localStorage.setItem("viajes", JSON.stringify(viajes));
-        Swal.fire({
-            title: 'Cambios en su viaje!',
-            icon: 'info',
-            confirmButtonText: 'Cool'
-        })
-    })
+        const today = new Date(); // Obtener la fecha actual
+        const selectedDate = new Date(fecha1);
+
+        if (selectedDate < today) {
+            // La fecha de ida seleccionada es una fecha pasada
+            Swal.fire({
+                title: 'Fecha de ida inválida',
+                text: 'Por favor, seleccione una fecha de ida válida.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        } else {
+            viajes[index].nombre = (data["nombre"].value).toUpperCase();
+            viajes[index].origen = data["origen"].value;
+            viajes[index].destino = data["destino"].value;
+            viajes[index].pasajeros = data["pasajeros"].value;
+            viajes[index].fechaIda = fecha1;
+            viajes[index].fechaVuelta = fecha2;
+            
+            viajes.forEach(viaje => {
+                viaje.viajeEstadia(viaje.fechaIda, viaje.fechaVuelta);
+                viaje.viajePrecio();
+            });
+
+            localStorage.setItem("viajes", JSON.stringify(viajes));
+            
+            Swal.fire({
+                title: 'Cambios en su viaje!',
+                text: 'Los cambios en el viaje se han guardado exitosamente.',
+                icon: 'info',
+                confirmButtonText: 'Cool'
+            });
+        }
+    });
 }
+
 
 function filtrado(viajes) {
     let nombreIngresado, origenIngresado, destinoIngresado;
