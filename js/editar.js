@@ -164,13 +164,22 @@ function editarViaje(id) {
         fecha2 = data["fechaVuelta"].value;
 
         const today = new Date(); // Obtener la fecha actual
-        const selectedDate = new Date(fecha1);
+        const selectedDateIda = new Date(fecha1);
+        const selectedDateVuelta = new Date(fecha2);
 
-        if (selectedDate < today) {
-            // La fecha de ida seleccionada es una fecha pasada
+        if (selectedDateIda < today || selectedDateVuelta < today) {
+            // Al menos una de las fechas seleccionadas es una fecha pasada
             Swal.fire({
-                title: 'Fecha de ida inválida',
-                text: 'Por favor, seleccione una fecha de ida válida.',
+                title: 'Fecha inválida',
+                text: 'Por favor, seleccione fechas válidas para el viaje.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        } else if (selectedDateVuelta < selectedDateIda) {
+            // La fecha de vuelta es anterior a la fecha de ida
+            Swal.fire({
+                title: 'Fecha de vuelta inválida',
+                text: 'La fecha de vuelta no puede ser anterior a la fecha de ida.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
@@ -198,6 +207,7 @@ function editarViaje(id) {
         }
     });
 }
+
 
 
 function filtrado(viajes) {

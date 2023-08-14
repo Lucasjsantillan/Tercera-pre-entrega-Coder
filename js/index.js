@@ -82,12 +82,24 @@ function crearViaje() {
         const datos = e.target.children;
 
         const fechaIda = new Date(datos["fechaIda"].value);
+        const fechaVuelta = new Date(datos["fechaVuelta"].value);
         const fechaActual = new Date();
 
         if (fechaIda < fechaActual) {
             Swal.fire({
                 title: 'Fecha de ida inválida',
                 text: 'No se puede elegir una fecha de ida en el pasado.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        
+        if (fechaVuelta < fechaIda) {
+            Swal.fire({
+                title: 'Fecha de vuelta inválida',
+                text: 'La fecha de vuelta no puede ser anterior a la fecha de ida.',
                 icon: 'error',
                 confirmButtonText: 'OK'
             });
