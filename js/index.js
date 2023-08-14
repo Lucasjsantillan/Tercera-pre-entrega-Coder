@@ -75,16 +75,28 @@ const viajes = (JSON.parse(localStorage.getItem("viajes")) ?? []);
 
 
 function crearViaje() {
-
     const data = document.querySelector("#form");
     data.addEventListener("submit", (e) => {
         e.preventDefault();
-        let id = parseInt((localStorage.getItem("id"))) || 0;
+        let id = parseInt(localStorage.getItem("id")) || 0;
         const datos = e.target.children;
+
+        const fechaIda = new Date(datos["fechaIda"].value);
+        const fechaActual = new Date();
+
+        if (fechaIda < fechaActual) {
+            Swal.fire({
+                title: 'Fecha de ida inválida',
+                text: 'No se puede elegir una fecha de ida en el pasado.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
         if (checkOrigen(datos["origen"].value) || checkDestino(datos["destino"].value)) {
             data.reset();
-        }
-        else {
+        } else {
             const viaje = new Viaje(
                 datos["nombre"].value,
                 datos["origen"].value,
@@ -94,8 +106,8 @@ function crearViaje() {
                 datos["pasajeros"].value,
                 id,
                 0,
-                0,
-            )
+                0
+            );
             viajes.push(viaje);
             viaje.viajeEstadia(viaje.fechaIda, viaje.fechaVuelta);
             viaje.viajePrecio();
@@ -105,14 +117,15 @@ function crearViaje() {
             data.reset();
             verViaje(viaje);
             Swal.fire({
-                title: 'viaje Ingresado!',
+                title: 'Viaje Ingresado!',
                 text: 'Buenas vacaciones!!!',
                 icon: 'success',
                 confirmButtonText: 'Cool'
-            })
+            });
         }
-    })
+    });
 }
+
 
 function imprimirViaje(viajes) {
 
